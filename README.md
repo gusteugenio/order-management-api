@@ -261,10 +261,10 @@ docker compose exec api npm run test:e2e
  
 ### Autenticação
  
-- [ ] Hash de senha com bcrypt
-- [ ] Geração de token JWT
-- [ ] Validação do token via `JwtStrategy`
-- [ ] Guard aplicado nas rotas protegidas
+- [x] Hash de senha com bcrypt
+- [x] Geração de token JWT
+- [x] Validação do token via `JwtStrategy`
+- [x] Guard aplicado nas rotas protegidas
  
 ### Documentação
  
