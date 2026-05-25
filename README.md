@@ -1,98 +1,295 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
+# Order Management API
+ 
+API RESTful para gerenciamento de pedidos, construída com Node.js, NestJS e PostgreSQL.
+ 
+---
+ 
+## Stack
+ 
+| Camada | Tecnologia |
+|---|---|
+| Runtime | Node.js 24 |
+| Framework | NestJS 11 |
+| Linguagem | TypeScript 5 |
+| Banco de Dados | PostgreSQL 16 |
+| ORM | Prisma 7 |
+| Autenticação | JWT + Passport |
+| Documentação | Swagger / OpenAPI |
+| Validação | class-validator + class-transformer |
+| Testes | Jest |
+| Containerização | Docker + Docker Compose |
+| Qualidade | ESLint + Prettier |
+ 
+---
+ 
+## Funcionalidades
+ 
+- Autenticação com JWT Bearer Token
+- Criar pedido com itens
+- Listar pedidos com paginação
+- Filtrar pedidos por número, status e período
+- Editar pedido
+- Exclusão lógica de pedidos (soft delete)
+- Documentação interativa via Swagger
+ 
+---
+ 
+## Arquitetura
+ 
 ```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+src/
+├── auth/
+│   ├── auth.controller.ts       # POST /auth/login
+│   ├── auth.service.ts          # lógica de autenticação
+│   ├── auth.module.ts
+│   ├── jwt.strategy.ts          # validação do token JWT
+│   └── dto/
+│       └── login.dto.ts
+├── orders/
+│   ├── orders.controller.ts     # rotas de pedidos
+│   ├── orders.service.ts        # lógica de negócio
+│   ├── orders.module.ts
+│   └── dto/
+│       ├── create-order.dto.ts
+│       ├── update-order.dto.ts
+│       └── filter-order.dto.ts
+├── prisma/
+│   ├── prisma.service.ts        # cliente Prisma
+│   └── prisma.module.ts
+└── main.ts                      # bootstrap, Swagger, ValidationPipe
 ```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+ 
+O projeto segue uma arquitetura em camadas:
+ 
 ```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+Request → Controller → Service → PrismaService → PostgreSQL
 ```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+ 
+- **Controller** — recebe a requisição, valida o DTO e delega ao service
+- **Service** — contém toda a lógica de negócio
+- **PrismaService** — acesso ao banco de dados
+- **Guards** — protegem as rotas autenticadas via JWT
+ 
+---
+ 
+## Modelo de Dados
+ 
+```mermaid
+erDiagram
+    Order {
+        string id PK
+        string number UK
+        datetime estimatedDeliveryDate
+        string customerName
+        string customerDocument
+        string deliveryAddress
+        enum status
+        datetime createdAt
+        datetime updatedAt
+        datetime deletedAt
+    }
+ 
+    OrderItem {
+        string id PK
+        string description
+        int quantity
+        float unitPrice
+        string orderId FK
+        datetime createdAt
+        datetime updatedAt
+    }
+ 
+    Order ||--o{ OrderItem : "possui"
+```
+ 
+### Status do Pedido
+ 
+```mermaid
+stateDiagram-v2
+    [*] --> PENDING
+    PENDING --> PROCESSING
+    PROCESSING --> DELIVERED
+    PENDING --> CANCELED
+    PROCESSING --> CANCELED
+```
+ 
+---
+ 
+## Rotas
+ 
+### Autenticação
+ 
+| Método | Rota | Descrição | Auth |
+|---|---|---|---|
+| POST | `/api/auth/login` | Gera token JWT | ✗ |
+ 
+### Pedidos
+ 
+| Método | Rota | Descrição | Auth |
+|---|---|---|---|
+| POST | `/api/orders` | Cria um pedido | ✓ |
+| GET | `/api/orders` | Lista pedidos | ✓ |
+| GET | `/api/orders/:id` | Busca pedido por ID | ✓ |
+| PATCH | `/api/orders/:id` | Edita pedido | ✓ |
+| DELETE | `/api/orders/:id` | Remove pedido (soft delete) | ✓ |
+ 
+### Filtros disponíveis
+ 
+```
+GET /api/orders?number=123
+GET /api/orders?status=PENDING
+GET /api/orders?startDate=2026-01-01&endDate=2026-01-31
+```
+ 
+---
+  
+## Como Rodar
+ 
+### Pré-requisitos
+ 
+- Docker
+- Docker Compose
+ 
+### 1. Clonar o repositório
+ 
+```bash
+git clone https://github.com/seu-usuario/order-management-api.git
+cd order-management-api
+```
+ 
+### 2. Configurar variáveis de ambiente
+ 
+```bash
+cp .env.example .env
+```
+ 
+Conteúdo do `.env`:
+ 
+```env
+DATABASE_URL="postgresql://postgres:postgres@postgres:5432/orders_db"
+JWT_SECRET="sua-chave-secreta"
+```
+ 
+### 3. Subir os containers
+ 
+```bash
+docker compose up --build
+```
+ 
+A API estará disponível em `http://localhost:3000`.
+ 
+---
+ 
+## Banco de Dados
+ 
+### Rodar migrations
+ 
+```bash
+docker compose exec api npx prisma migrate dev
+```
+ 
+### Popular o banco com dados fictícios
+ 
+```bash
+docker compose exec api npm run seed
+```
+ 
+### Abrir Prisma Studio
+ 
+```bash
+docker compose exec api npx prisma studio --port 5555 --browser none
+```
+ 
+Acesse em `http://localhost:5555`.
+ 
+---
+ 
+## Swagger
+ 
+Documentação interativa disponível em:
+ 
+```
+http://localhost:3000/api/docs
+```
+ 
+Para testar rotas protegidas, faça login em `POST /api/auth/login` e insira o token no botão **Authorize** no topo da página.
+ 
+---
+ 
+## Testes
+ 
+```bash
+# unitários
+docker compose exec api npm run test
+ 
+# cobertura
+docker compose exec api npm run test:cov
+ 
+# e2e
+docker compose exec api npm run test:e2e
+```
+ 
+---
+ 
+## Checklist
+ 
+### API
+ 
+- [ ] `POST /auth/login` com bcrypt + JWT
+- [ ] `JwtAuthGuard` protegendo rotas
+- [ ] `POST /orders` com itens
+- [ ] `GET /orders` com filtros (número, status, período)
+- [ ] `GET /orders/:id`
+- [ ] `PATCH /orders/:id`
+- [ ] `DELETE /orders/:id` com soft delete
+- [ ] Tratamento de erros padronizado
+- [ ] Respostas padronizadas
+ 
+### Validação
+ 
+- [x] `ValidationPipe` global configurado
+- [ ] DTOs com class-validator em todas as rotas
+- [ ] Campos obrigatórios validados
+- [ ] Formatos validados (CPF, datas, enums)
+ 
+### Banco de Dados
+ 
+- [x] Migration inicial criada
+- [x] Índices criados (`customerDocument`, `orderId`)
+- [x] Soft delete implementado (`deletedAt`)
+- [ ] Seed com pedidos e itens fictícios
+ 
+### Autenticação
+ 
+- [ ] Hash de senha com bcrypt
+- [ ] Geração de token JWT
+- [ ] Validação do token via `JwtStrategy`
+- [ ] Guard aplicado nas rotas protegidas
+ 
+### Documentação
+ 
+- [x] Swagger configurado em `/api/docs`
+- [x] Autenticação Bearer configurada no Swagger
+- [ ] Todos os endpoints documentados
+- [ ] Exemplos de request nos DTOs
+ 
+### Qualidade
+ 
+- [ ] ESLint sem erros
+- [ ] Prettier aplicado
+- [ ] Testes unitários no `AuthService`
+- [ ] Testes unitários no `OrdersService`
+ 
+### DevOps
+ 
+- [x] `Dockerfile` funcional
+- [x] `docker compose up` sobe tudo
+- [x] Healthcheck no Postgres
+- [x] `.env.example` criado
+- [ ] GitHub Actions com lint + testes (bônus)
+ 
+### README
+ 
+- [ ] Stack documentada
+- [ ] Como rodar documentado
+- [ ] Rotas documentadas
