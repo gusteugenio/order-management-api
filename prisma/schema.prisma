@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  DELIVERED
+  CANCELED
+}
+
+model Order {
+  id                    String        @id @default(uuid())
+  number                String        @unique
+  estimatedDeliveryDate DateTime
+
+  customerName          String
+  customerDocument      String        @db.VarChar(14)
+
+  deliveryAddress       String
+
+  status                OrderStatus   @default(PENDING)
+
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  deletedAt             DateTime?
+
+  items                 OrderItem[]
+
+  @@index([customerDocument])
+}
+
+model OrderItem {
+  id          String @id @default(uuid())
+
+  description String
+
+  quantity    Int
+
+  unitPrice   Float
+
+  orderId     String
+  order       Order @relation(fields: [orderId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([orderId])
+}
