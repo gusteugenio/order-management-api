@@ -10,7 +10,7 @@ API RESTful desenvolvida em Node.js com NestJS para gerenciamento de pedidos, co
 
 Para atender aos critérios de **Segurança, Boas Práticas e Performance** do projeto, a API conta com:
 - **Automação com CI/CD:** Integração contínua via GitHub Actions que executa automaticamente a validação de padrões (Linter) e a suíte de testes unitários a cada push ou Pull Request, garantindo a estabilidade do código.
-- **Segurança Avançada:** Senhas criptografadas com `bcrypt` e proteção de rotas via `JwtAuthGuard` (Bearer Token).
+- **Segurança com JWT e hash de senha:** Senhas criptografadas com `bcrypt` e proteção de rotas via `JwtAuthGuard` (Bearer Token).
 - **Performance em Consultas:** Criação de índices específicos no banco de dados (`customerDocument` e `orderId`) para otimizar os filtros de busca.
 - **Resiliência de Dados:** Implementação de exclusão lógica (*soft delete*) via campo `deletedAt`, garantindo que o histórico de pedidos não seja perdido no banco de dados.
 - **Conformidade REST:** Status HTTP semânticos e tratamento global de exceções.
@@ -38,10 +38,10 @@ Para atender aos critérios de **Segurança, Boas Práticas e Performance** do p
 ## Funcionalidades
  
 - Autenticação com JWT Bearer Token
-- Criar pedido com itens
-- Listar pedidos com paginação
-- Filtrar pedidos por número, status e período
-- Editar pedido
+- Criação de pedido com itens
+- Listagem de pedidos
+- Filtragem de pedidos por número, status e período
+- Edição pedido
 - Exclusão lógica de pedidos (soft delete)
 - Documentação interativa via Swagger
  
@@ -275,6 +275,16 @@ docker compose exec api npm run test
 docker compose exec api npm run test:cov
 ```
  
+### Cobertura de testes
+
+A cobertura atual do projeto é:
+
+- **AuthService:** 100% de statements
+- **OrdersService:** ~89% de statements
+- Cobertura geral: ~26%
+
+> Os testes estão concentrados nas regras de negócio, não cobrindo controllers e bootstrap da aplicação por escolha arquitetural.      
+
 ---
  
 ## CI/CD
