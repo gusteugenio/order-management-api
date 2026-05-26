@@ -236,8 +236,19 @@ O token JWT é salvo automaticamente após o login, o é necessário configurar 
 
 ---
 
-## Testes
- 
+## Qualidade/Testes
+
+### Lint e formatação
+
+```bash
+# lint
+docker compose exec api npm run lint
+
+# prettier
+docker compose exec api npm run format
+```
+
+### Testes
 ```bash
 # unitários
 docker compose exec api npm run test
@@ -295,8 +306,8 @@ docker compose exec api npm run test:e2e
  
 ### Qualidade
  
-- [ ] ESLint sem erros
-- [ ] Prettier aplicado
+- [x] ESLint sem erros
+- [x] Prettier aplicado
 - [ ] Testes unitários no `AuthService`
 - [ ] Testes unitários no `OrdersService`
  

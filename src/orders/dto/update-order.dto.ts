@@ -17,7 +17,10 @@ export class UpdateOrderDto {
   @IsDateString()
   estimatedDeliveryDate?: string;
 
-  @ApiProperty({ example: 'Av. Paulista, 1000 - São Paulo, SP', required: false })
+  @ApiProperty({
+    example: 'Av. Paulista, 1000 - São Paulo, SP',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   deliveryAddress?: string;
