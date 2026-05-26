@@ -141,6 +141,8 @@ GET /api/orders?status=PENDING
 GET /api/orders?startDate=2026-01-01&endDate=2026-01-31
 ```
  
+> O filtro de período é aplicado sobre a **data de previsão de entrega** do pedido.
+
 ---
   
 ## Como Rodar
@@ -221,7 +223,19 @@ http://localhost:3000/api/docs
 | Senha | `admin123` |
 
 ---
- 
+
+## Postman
+
+Importe a collection para testar a API localmente:
+
+1. Abra o Postman
+2. Clique em **File → Import**
+3. Selecione o arquivo `postman/order-management-api.postman_collection.json`
+
+O token JWT é salvo automaticamente após o login, o é necessário configurar manualmente.
+
+---
+
 ## Testes
  
 ```bash
@@ -243,20 +257,20 @@ docker compose exec api npm run test:e2e
  
 - [x] `POST /auth/login` com bcrypt + JWT
 - [x] `JwtAuthGuard` protegendo rotas
-- [ ] `POST /orders` com itens
-- [ ] `GET /orders` com filtros (número, status, período)
-- [ ] `GET /orders/:id`
-- [ ] `PATCH /orders/:id`
-- [ ] `DELETE /orders/:id` com soft delete
+- [x] `POST /orders` com itens
+- [x] `GET /orders` com filtros (número, status, período)
+- [x] `GET /orders/:id`
+- [x] `PATCH /orders/:id`
+- [x] `DELETE /orders/:id` com soft delete
 - [ ] Tratamento de erros padronizado
 - [ ] Respostas padronizadas
  
 ### Validação
  
 - [x] `ValidationPipe` global configurado
-- [ ] DTOs com class-validator em todas as rotas
-- [ ] Campos obrigatórios validados
-- [ ] Formatos validados (CPF, datas, enums)
+- [x] DTOs com class-validator em todas as rotas
+- [x] Campos obrigatórios validados
+- [x] Formatos validados (CPF, datas, enums)
  
 ### Banco de Dados
  
@@ -276,8 +290,8 @@ docker compose exec api npm run test:e2e
  
 - [x] Swagger configurado em `/api/docs`
 - [x] Autenticação Bearer configurada no Swagger
-- [ ] Todos os endpoints documentados
-- [ ] Exemplos de request nos DTOs
+- [x] Todos os endpoints documentados
+- [x] Exemplos de request nos DTOs
  
 ### Qualidade
  
@@ -298,4 +312,4 @@ docker compose exec api npm run test:e2e
  
 - [x] Stack documentada
 - [x] Como rodar documentado
-- [ ] Rotas documentadas
+- [x] Rotas documentadas
