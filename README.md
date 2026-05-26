@@ -193,7 +193,6 @@ docker compose exec api npx prisma migrate dev
 ```bash
 docker compose exec api npm run seed
 ```
- 
 ### Abrir Prisma Studio
  
 ```bash
@@ -212,8 +211,15 @@ Documentação interativa disponível em:
 http://localhost:3000/api/docs
 ```
  
-Para testar rotas protegidas, faça login em `POST /api/auth/login` e insira o token no botão **Authorize** no topo da página.
- 
+> Para testar rotas protegidas, faça login em `POST /api/auth/login` e insira o token no botão **Authorize** no topo da página.
+
+### Credenciais de Teste
+
+| Campo | Valor |
+|---|---|
+| Email | `admin@orders.com` |
+| Senha | `admin123` |
+
 ---
  
 ## Testes
@@ -235,8 +241,8 @@ docker compose exec api npm run test:e2e
  
 ### API
  
-- [ ] `POST /auth/login` com bcrypt + JWT
-- [ ] `JwtAuthGuard` protegendo rotas
+- [x] `POST /auth/login` com bcrypt + JWT
+- [x] `JwtAuthGuard` protegendo rotas
 - [ ] `POST /orders` com itens
 - [ ] `GET /orders` com filtros (número, status, período)
 - [ ] `GET /orders/:id`
@@ -257,7 +263,7 @@ docker compose exec api npm run test:e2e
 - [x] Migration inicial criada
 - [x] Índices criados (`customerDocument`, `orderId`)
 - [x] Soft delete implementado (`deletedAt`)
-- [ ] Seed com pedidos e itens fictícios
+- [x] Seed com pedidos e itens fictícios
  
 ### Autenticação
  
@@ -290,6 +296,6 @@ docker compose exec api npm run test:e2e
  
 ### README
  
-- [ ] Stack documentada
-- [ ] Como rodar documentado
+- [x] Stack documentada
+- [x] Como rodar documentado
 - [ ] Rotas documentadas
