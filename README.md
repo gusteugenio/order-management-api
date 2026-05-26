@@ -255,9 +255,6 @@ docker compose exec api npm run test
  
 # cobertura
 docker compose exec api npm run test:cov
- 
-# e2e
-docker compose exec api npm run test:e2e
 ```
  
 ---
@@ -308,8 +305,8 @@ docker compose exec api npm run test:e2e
  
 - [x] ESLint sem erros
 - [x] Prettier aplicado
-- [ ] Testes unitários no `AuthService`
-- [ ] Testes unitários no `OrdersService`
+- [x] Testes unitários no `AuthService`
+- [x] Testes unitários no `OrdersService`
  
 ### DevOps
  
