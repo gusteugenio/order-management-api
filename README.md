@@ -1,9 +1,23 @@
 # Order Management API
- 
-API RESTful para gerenciamento de pedidos, construída com Node.js, NestJS e PostgreSQL.
- 
+
+## Sobre o Projeto
+
+[![CI/CD Pipeline](https://github.com/gusteugenio/order-management-api/actions/workflows/ci.yml/badge.svg)](https://github.com/gusteugenio/order-management-api/actions)
+API RESTful desenvolvida em Node.js com NestJS para gerenciamento de pedidos, com foco em boas práticas de arquitetura, segurança, testes e organização de código.
+
 ---
- 
+
+## Destaques da Implementação
+
+Para atender aos critérios de **Segurança, Boas Práticas e Performance** do projeto, a API conta com:
+- **Automação com CI/CD:** Integração contínua via GitHub Actions que executa automaticamente a validação de padrões (Linter) e a suíte de testes unitários a cada push ou Pull Request, garantindo a estabilidade do código.
+- **Segurança Avançada:** Senhas criptografadas com `bcrypt` e proteção de rotas via `JwtAuthGuard` (Bearer Token).
+- **Performance em Consultas:** Criação de índices específicos no banco de dados (`customerDocument` e `orderId`) para otimizar os filtros de busca.
+- **Resiliência de Dados:** Implementação de exclusão lógica (*soft delete*) via campo `deletedAt`, garantindo que o histórico de pedidos não seja perdido no banco de dados.
+- **Conformidade REST:** Status HTTP semânticos e tratamento global de exceções.
+
+---
+
 ## Stack
  
 | Camada | Tecnologia |
@@ -175,7 +189,7 @@ JWT_SECRET="sua-chave-secreta"
 ### 3. Subir os containers
  
 ```bash
-docker compose up --build
+docker compose up --build -d
 ```
  
 A API estará disponível em `http://localhost:3000`.
@@ -232,11 +246,16 @@ Importe a collection para testar a API localmente:
 2. Clique em **File → Import**
 3. Selecione o arquivo `postman/order-management-api.postman_collection.json`
 
-O token JWT é salvo automaticamente após o login, o é necessário configurar manualmente.
+O token JWT é salvo automaticamente após o login, não sendo necessário configurar manualmente.
 
 ---
 
 ## Qualidade/Testes
+
+- ESLint sem erros
+- Prettier aplicado
+- Testes unitários em services
+- Código modular e escalável
 
 ### Lint e formatação
 
@@ -259,6 +278,17 @@ docker compose exec api npm run test:cov
  
 ---
  
+## CI/CD
+
+GitHub Actions executa automaticamente:
+
+- ESLint (lint)
+- Jest (testes)
+
+Em push e pull request na branch main.
+
+---
+
 ## Checklist
  
 ### API
@@ -314,7 +344,7 @@ docker compose exec api npm run test:cov
 - [x] `docker compose up` sobe tudo
 - [x] Healthcheck no Postgres
 - [x] `.env.example` criado
-- [ ] GitHub Actions com lint + testes (bônus)
+- [x] GitHub Actions com lint + testes (bônus)
  
 ### README
  
