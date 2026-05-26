@@ -262,8 +262,8 @@ docker compose exec api npm run test:e2e
 - [x] `GET /orders/:id`
 - [x] `PATCH /orders/:id`
 - [x] `DELETE /orders/:id` com soft delete
-- [ ] Tratamento de erros padronizado
-- [ ] Respostas padronizadas
+- [x] Tratamento de erros padronizado
+- [x] Respostas padronizadas
  
 ### Validação
  
