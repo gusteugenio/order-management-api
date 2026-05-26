@@ -2,7 +2,6 @@
 
 ## Sobre o Projeto
 
-[![CI/CD Pipeline](https://github.com/gusteugenio/order-management-api/actions/workflows/ci.yml/badge.svg)](https://github.com/gusteugenio/order-management-api/actions)
 API RESTful desenvolvida em Node.js com NestJS para gerenciamento de pedidos, com foco em boas práticas de arquitetura, segurança, testes e organização de código.
 
 ---
